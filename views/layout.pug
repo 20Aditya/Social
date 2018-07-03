@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title Socialise
+    link(href='/bower_components/bootstrap/dist/css/bootstrap.css' rel='stylesheet' type='text/css')
+    link(href='/css/style.css' rel='stylesheet' type='text/css')
+
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark 
+      a.navbar-brand(href='#') Social
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='/')
+              | Home 
+              span.sr-only (current)
+        ul.nav.navbar-nav.navbar-right
+          if user
+            li.nav-item.active 
+              a.nav-link(href='/logout') 
+                | Logout 
+                span.sr-only(current)
+          else
+            li.nav-item.active
+              a.nav-link(href='/register')
+                | SignUp  
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='/login')
+                | Login 
+                span.sr-only (current)  
+
+    .container
+      != messages('message',locals)
+      if errors 
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Copyright &copy; 2018
+        
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+    script(src='/js/main.js')

@@ -12,10 +12,27 @@ html
         span.navbar-toggler-icon
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/')
-              | Home 
-              span.sr-only (current)
+          if user
+            li.nav-item.active
+              a.nav-link(href='/')
+                | Home 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='/profile')
+                | Profile 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='/followers')
+                | Followers 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='/following')
+                | Following 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='/chats')
+                | Messages 
+                span.sr-only (current)
         ul.nav.navbar-nav.navbar-right
           if user
             li.nav-item.active 

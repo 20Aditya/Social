@@ -80,7 +80,6 @@ router.post('/login',function(req,res,next){
     successRedirect:'/',
     failureRedirect:'/login',
     failureFlash: true,
-    successFlash: 'You have logged in'
   })(req,res,next);
 });
 
@@ -90,6 +89,41 @@ router.get('/logout',function(req,res){
   req.flash('success','You are logged out');
   res.redirect('/login');
 })
+
+
+router.get('/profile',ensureAuthenticated,function(req,res){
+  var name = req.user.name;
+  res.render('profile',{
+    name:name,
+    email: req.user.email
+  });
+});
+
+
+router.get('/followers',ensureAuthenticated,function(req,res) {
+  res.render('followers');
+});
+
+
+router.get('/following',ensureAuthenticated,function(req,res) {
+  res.render('following');
+});
+
+
+
+router.get('/chats',ensureAuthenticated,function(req,res) {
+  res.render('chats');
+});
+
+
+function ensureAuthenticated(req,res,next){
+  if(req.isAuthenticated()){
+    next();
+  }else{
+    req.flash('danger','Please Login');
+    res.redirect('/login');
+  }
+}
 
 
 module.exports = router;
